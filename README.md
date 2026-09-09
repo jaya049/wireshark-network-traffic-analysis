@@ -64,3 +64,38 @@ The capture shows DNS A and AAAA queries from Kali (10.0.2.15) to the DNS resolv
 - Ipv4 result for standard A Query
 - An IPv6 result for the AAAA query.
 
+## Phase 4 : Http Analysis
+### Http get analysis
+<img width="847" height="438" alt="image" src="https://github.com/user-attachments/assets/0c15cd58-78ec-4665-b7f3-dfabf0a1c658" />
+
+Windows 10                         Kali
+192.168.213.102                    192.168.213.101
+       │                                  │
+       │──── GET / HTTP/1.1 ─────────────>│
+       │<─── HTTP/1.0 200 OK ─────────────│
+
+What packets show:
+| Packet | Traffic              | Meaning                                  |
+| ------ | -------------------- | ---------------------------------------- |
+| 7      | `GET / HTTP/1.1`     | Windows requested the web page from Kali |
+| 10     | `HTTP/1.0 200 OK`    | Kali successfully returned the page      |
+| 14     | `GET /favicon.ico`   | Browser requested the site's favicon     |
+| 17     | `404 File not found` | Kali doesn't have a favicon              |
+| 27     | `HTTP/1.0 200 OK`    | Another successful HTTP response         |
+
+### TCP Connection check
+TCP Connection established between Windows and Kali
+
+Windows 10                         Kali
+192.168.213.102                    192.168.213.101
+
+      │
+      │──── SYN ──────────────────>│  Packet 1
+      │<─── SYN, ACK ──────────────│  Packet 2
+      │──── ACK ──────────────────>│  Packet 3
+      │
+
+<img width="846" height="443" alt="image" src="https://github.com/user-attachments/assets/c3984253-a380-4fad-afe0-a73ff99a0ebe" />
+
+![Uploading image.png…]()
+
