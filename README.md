@@ -3,21 +3,23 @@ Hands-on network traffic analysis and security investigation using Wireshark in 
 
 # Setup
 
-                 Windows Host PC
-                 ┌──────────────┐
-                 │  Wireshark   │
-                 │   Capture    │
-                 └──────┬───────┘
-                        │
-              VirtualBox Host-Only
-                  Network
-                 192.168.x.x
-                        │
-          ┌─────────────┴─────────────┐
-          │                           │
-     Kali Linux                  Windows 10
-       VM                          VM
-    Nmap / tools                 Target
+                         Internet
+                            │
+                       NAT Adapter
+                            │
+             ┌──────────────┴──────────────┐
+             │                             │
+        Kali Linux VM                 Windows 10 VM
+        ┌──────────────┐             ┌──────────────┐
+        │              │             │              │
+        │  Wireshark   │             │   Target     │
+        │  Nmap        │             │   System     │
+        │  tcpdump     │             │              │
+        │              │             │              │
+        └──────┬───────┘             └──────┬───────┘
+               │                            │
+               └──── Host-Only Network ─────┘
+                       192.168.x.x
 
 # Methodology
 ## Phase 1 : ICMP Analysis
