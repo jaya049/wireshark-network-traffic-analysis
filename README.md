@@ -70,19 +70,20 @@ The capture shows DNS A and AAAA queries from Kali (10.0.2.15) to the DNS resolv
 
 Windows 10                         Kali
 192.168.213.102                    192.168.213.101
-       │                                  │
+
        │──── GET / HTTP/1.1 ─────────────>│
        │<─── HTTP/1.0 200 OK ─────────────│
 
 What packets show:
-| Packet | Traffic              | Meaning                                  |
-| ------ | -------------------- | ---------------------------------------- |
-| 7      | `GET / HTTP/1.1`     | Windows requested the web page from Kali |
-| 10     | `HTTP/1.0 200 OK`    | Kali successfully returned the page      |
-| 14     | `GET /favicon.ico`   | Browser requested the site's favicon     |
-| 17     | `404 File not found` | Kali doesn't have a favicon              |
-| 27     | `HTTP/1.0 200 OK`    | Another successful HTTP response         |
+| Packet | Traffic              | Meaning                                   |
+| ------ | -------------------- | ----------------------------------------  |
+| 7      | `GET / HTTP/1.1`     | Windows requested the web page from Kali* |
+| 10     | `HTTP/1.0 200 OK`    | Kali successfully returned the page       |
+| 14     | `GET /favicon.ico`   | Browser requested the site's favicon      |
+| 17     | `404 File not found` | Kali doesn't have a favicon               |
+| 27     | `HTTP/1.0 200 OK`    | Another successful HTTP response          |
 
+*The Browser url:  `http://<KALI IP>:8000`
 ### TCP Connection check
 TCP Connection established between Windows and Kali
 
@@ -107,4 +108,25 @@ Packet 3:
 
 <img width="883" height="382" alt="image" src="https://github.com/user-attachments/assets/c7e3f9db-7ce7-43fc-999d-c1fe9b994191" />
 
+### Inference
+Complete transaction between Kali Http server (Port: 8000) and windows browser is:
 
+Windows 10                          Kali
+192.168.213.102                     192.168.213.101
+
+      │──────── SYN ─────────────────────>│
+      │<─────── SYN, ACK ────────────────│
+      │──────── ACK ─────────────────────>│
+      │                                   │
+      │──────── GET / HTTP/1.1 ─────────>│
+      │                                   │
+      │<─────── HTTP 200 OK ─────────────│
+      │                                   │
+
+### Security Observation
+
+The TCP Stream view can be obtained:
+
+<img width="635" height="395" alt="image" src="https://github.com/user-attachments/assets/b9c056cf-ff5d-4b64-8a48-0e4e0805872e" />
+
+The HTTP response exposed the server software and Python version through the Server header, demonstrating how application-layer metadata can assist technology fingerprinting. The application-layer content itself is visible in the HTTP stream. This is exactly why HTTP should not be used for sensitive communication.
