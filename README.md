@@ -45,3 +45,22 @@ Successfully captured the ARP exchange between Kali VM and Windows VM.
 
 ### Inference
 ARP establishes the mapping between IPv4 addresses and MAC addresses on the local network. Because ARP does not inherently authenticate these mappings, malicious ARP responses can potentially be used to redirect local network traffic.
+
+## Phase 3 : DNS Analysis
+### Traffic Generation
+DNS traffic was generated from the Kali Linux VM using `nslookup`.
+From Kali : `nslookup example.com `
+ie, queries to 8.8.8.8, Google's public DNS resolver.
+### DNS Capture
+Query:
+<img width="958" height="429" alt="image" src="https://github.com/user-attachments/assets/b30e46f4-ad3c-41e9-9a39-d6ca72a21382" />
+
+Response: 
+<img width="930" height="452" alt="image" src="https://github.com/user-attachments/assets/2e926007-6c63-43af-95a7-27ba241f5447" />
+
+
+### Inference
+The capture shows DNS A and AAAA queries from Kali (10.0.2.15) to the DNS resolver (8.8.8.8) and the corresponding responses containing IPv4 and IPv6 records.
+- Ipv4 result for standard A Query
+- An IPv6 result for the AAAA query.
+
