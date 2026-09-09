@@ -18,3 +18,8 @@ Hands-on network traffic analysis and security investigation using Wireshark in 
      Kali Linux                  Windows 10
        VM                          VM
     Nmap / tools                 Target
+
+# Methodology
+## Phase 1 : ICMP Analysis
+<img width="958" height="503" alt="image" src="https://github.com/user-attachments/assets/49f42be1-9c77-4676-a024-577fb0363f58" />
+
