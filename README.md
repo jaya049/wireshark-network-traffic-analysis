@@ -94,8 +94,17 @@ Windows 10                         Kali
       │<─── SYN, ACK ──────────────│  Packet 2
       │──── ACK ──────────────────>│  Packet 3
       │
+      
+Packet 1:
 
 <img width="846" height="443" alt="image" src="https://github.com/user-attachments/assets/c3984253-a380-4fad-afe0-a73ff99a0ebe" />
 
-![Uploading image.png…]()
+Packet 2:
+
+<img width="856" height="356" alt="image" src="https://github.com/user-attachments/assets/8347a7f5-48db-4d13-8ae4-ab64e8d520fa" />
+
+Packet 3:
+
+<img width="883" height="382" alt="image" src="https://github.com/user-attachments/assets/c7e3f9db-7ce7-43fc-999d-c1fe9b994191" />
+
 
